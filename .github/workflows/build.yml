@@ -20,7 +20,7 @@ jobs:
         xmake-version: 'latest'
     - name: Install Dependencies
       run: |
-        apt-get install DEBIAN_FRONTEND="noninteractive" -y \
+        sudo apt-get install DEBIAN_FRONTEND="noninteractive" -y \
           libelf-dev \
           zlib1g-dev \
           libbfd-dev \
@@ -33,7 +33,6 @@ jobs:
           llvm-runtime \
           libllvm\
           make pkg-config \
-          rustc cargo rustfmt \
           sudo \
           && apt-get -y clean
     - name: Build xmake android examples/c
