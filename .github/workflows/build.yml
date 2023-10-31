@@ -59,7 +59,7 @@ jobs:
           -v $(pwd):/libbpf-bootstrap \
           build_container \
           /bin/bash -c \
-          'add-apt-repository ppa:xmake-io/xmake && apt-get update -y && apt-get install -y xmake'
+          'apt-get install software-properties-common -y && add-apt-repository ppa:xmake-io/xmake && apt-get update -y && apt-get install -y xmake'
         docker run \
           -v $(pwd):/libbpf-bootstrap \
           build_container \
