@@ -64,4 +64,4 @@ jobs:
           -v $(pwd):/libbpf-bootstrap \
           build_container \
           /bin/bash -c \
-          'cd /libbpf-bootstrap/examples/c && /root/.local/bin/xmake f -p android --root && /root/.local/bin/xmake --root'
+          'cd /libbpf-bootstrap/examples/c && xmake f -p android --root && xmake --root'
