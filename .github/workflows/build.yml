@@ -20,16 +20,8 @@ jobs:
         xmake-version: 'latest'
     - name: Install Dependencies
       run: |
-        sudo apt-get install -y \
-          libelf-dev \
-          zlib1g-dev \
-          libbfd-dev \
-          clang \
-          llvm \
-          llvm-dev \
-          llvm-runtime \
-          libllvm\
-          make pkg-config \
+        sudo apt-get update -y && sudo apt-get install -yqq \
+          build-essential clang llvm libelf1 libelf-dev zlib1g-dev libc++-dev libc++abi-dev \
           sudo \
           && apt-get -y clean
     - name: Build xmake android examples/c
