@@ -20,14 +20,11 @@ jobs:
         xmake-version: 'latest'
     - name: Install Dependencies
       run: |
-        sudo apt-get install DEBIAN_FRONTEND="noninteractive" -y \
+        sudo apt-get install -y \
           libelf-dev \
           zlib1g-dev \
           libbfd-dev \
           clang \
-          libclang-dev \
-          libclang-common-dev \
-          libclang1 \
           llvm \
           llvm-dev \
           llvm-runtime \
