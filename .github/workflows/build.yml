@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: [armeabi-v8a, x86_64]
+        arch: [armeabi-v7a, x86_64]
     steps:
     - uses: actions/checkout@v2
       with:
