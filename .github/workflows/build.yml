@@ -1,4 +1,4 @@
-name: libbpf-bootstrap build
+name: libbpf-bootstrap android ubuntu
 
 on:
   push:
@@ -7,34 +7,35 @@ on:
   pull_request:
 
 jobs:
-  build_libbpf_bootstrap:
+  build_libbpf_bootstrap_android:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        llvm: [18]
     steps:
     - uses: actions/checkout@v2
       with:
         submodules: recursive
     - uses: xmake-io/github-action-setup-xmake@v1
       with:
-        xmake-version: '2.8.3'
-    - name: Build container (22.04)
-      if: ${{ matrix.llvm >= 14 }}
-      uses: docker/build-push-action@v3
-      with:
-        push: false
-        build-args: |
-          LLVM_VERSION=${{ matrix.llvm }}
-          VERSION=22.04
-          SHORTNAME=jammy
-        file: ./.github/docker/Dockerfile.ubuntu
-        tags: build_container
+        xmake-version: 'latest'
+    - name: Install Dependencies
+      run: |
+        apt-get install DEBIAN_FRONTEND="noninteractive" -y \
+          libelf-dev \
+          zlib1g-dev \
+          libbfd-dev \
+          clang \
+          libclang-dev \
+          libclang-common-dev \
+          libclang1 \
+          llvm \
+          llvm-dev \
+          llvm-runtime \
+          libllvm\
+          make pkg-config \
+          rustc cargo rustfmt \
+          sudo \
+          && apt-get -y clean
     - name: Build xmake android examples/c
       run: |
-        docker run \
-          -v $(pwd):/libbpf-bootstrap \
-          build_container \
-          /bin/bash -c \
-          'cd /libbpf-bootstrap/examples/c && xmake f -p android --root && xmake --root'
+        cd /libbpf-bootstrap/examples/c && xmake f -p android && xmake
