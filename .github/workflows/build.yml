@@ -17,17 +17,6 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: recursive
-    - name: Build container (20.04)
-      if: ${{ matrix.llvm < 14 }}
-      uses: docker/build-push-action@v3
-      with:
-        push: false
-        build-args: |
-          LLVM_VERSION=${{ matrix.llvm }}
-          VERSION=20.04
-          SHORTNAME=focal
-        file: ./.github/docker/Dockerfile.ubuntu
-        tags: build_container
     - name: Build container (22.04)
       if: ${{ matrix.llvm >= 14 }}
       uses: docker/build-push-action@v3
@@ -45,7 +34,12 @@ jobs:
           -v $(pwd):/libbpf-bootstrap \
           build_container \
           /bin/bash -c \
-          'apt-get install software-properties-common -y && add-apt-repository ppa:xmake-io/xmake && apt-get update -y && apt-get install apt-utils && DEBIAN_FRONTEND=noninteractive apt-get install -y xmake && source ~/.bashrc'
+          'curl -fsSL https://xmake.io/shget.text | bash'
+        docker run \
+          -v $(pwd):/libbpf-bootstrap \
+          build_container \
+          /bin/bash -c \
+          'source ~/.xmake/profile'
         docker run \
           -v $(pwd):/libbpf-bootstrap \
           build_container \
