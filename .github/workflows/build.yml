@@ -59,9 +59,9 @@ jobs:
           -v $(pwd):/libbpf-bootstrap \
           build_container \
           /bin/bash -c \
-          'curl -fsSL https://xmake.io/shget.text | bash && source ~/.xmake/profile'
+          'curl -fsSL https://xmake.io/shget.text | bash'
         docker run \
           -v $(pwd):/libbpf-bootstrap \
           build_container \
           /bin/bash -c \
-          'cd /libbpf-bootstrap/examples/c && xmake f -p android && xmake'
+          'cd /libbpf-bootstrap/examples/c && /root/.local/bin/xmake f -p android && /root/.local/bin/xmake'
