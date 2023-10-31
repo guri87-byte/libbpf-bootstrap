@@ -26,4 +26,5 @@ jobs:
           && sudo apt-get -y clean
     - name: Build xmake android examples/c
       run: |
-        cd /libbpf-bootstrap/examples/c && xmake f -p android && xmake
+        ls -lha
+        cd examples/c && xmake f -p android && xmake
