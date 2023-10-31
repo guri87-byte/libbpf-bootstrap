@@ -26,5 +26,4 @@ jobs:
           && sudo apt-get -y clean
     - name: Build xmake android examples/c
       run: |
-        ls -lha
-        cd examples/c && xmake f -p android && xmake
+        cd examples/c && xmake f -p android -y && xmake -y
