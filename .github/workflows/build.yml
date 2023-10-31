@@ -39,7 +39,7 @@ jobs:
           -v $(pwd):/libbpf-bootstrap \
           build_container \
           /bin/bash -c \
-          'source ~/.profile'
+          'source ~/.profile && source ~/.bashrc'
         docker run \
           -v $(pwd):/libbpf-bootstrap \
           build_container \
